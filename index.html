@@ -109,15 +109,58 @@
 <p>Below we have explained the significant steps of the algorithm.</p>
 
 <ul>
-<li>We first consider each of the frame of the video independently</li>
-<li>We choose a suitable colour space in which we want to work, This could depend on the specific application that we are dealing with, though in the paper, authors have used NTSC colour space for further operations.</li>
-<li>For each of the color(or spectrum level for hyper spectral images), we build a Laplacian pyramid. Note the Laplacian Pyramid is build of the NTSC domain image, not the RGB image.</li>
-<li>We define the lowpass filter to have the Laplacian Pyramid values. Note that the Laplacian Pyramids are used to smooth in the spatial domain.</li>
-<li>We consider the next frame, and perform the similar laplacian pyramid calculation on it.</li>
-<li>The value of laplacian pyramids of subsequent frames is used to perform the temporal filtering of the signal. The exact method of temporal filtering could vary with application, for ex. we could use a butterworth filter, an IIR filter etc.</li>
-<li>The above method will give us the lower and upper frequency bounds. We calculate the difference of them to get the frequencies that we want to filter(magnify or suppress).</li>
-<li>Given the selected frequencies, we selectively magnify them based on user preference. The paper has used a linear magnification till a certain frequency and constant magnification after a certain threshold frequency as the choice, though this can be left as a user defined parameter.</li>
+<li>We start by considering each of the frame of the video independently for analysis</li>
+<li>We choose a suitable colour space in which we want to work, This could depend on the specific application that we are dealing with, though in the paper, authors have used NTSC color space for further operations. </li>
 </ul>
+
+<pre><code>frame = rgb2ntsc(rgbframe);
+</code></pre>
+
+<ul>
+<li>For each of the color level(or spectrum level for hyper spectral images), we build a Laplacian pyramid. Note the Laplacian Pyramid is built of the NTSC image, not the RGB image.</li>
+</ul>
+
+<pre><code>[pyr,pind] = buildLaplacianPyramid(frame(:,:,1))
+</code></pre>
+
+<ul>
+<li>We initialise the lowpass filter to have the Laplacian Pyramid values. Later, we will change the values of the filter limits to perform temporal filtering of the signal.</li>
+<li>We consider the next frame, and perform the similar laplacian pyramid calculation on it(after converting in NTSC colour space).</li>
+<li>The value of laplacian pyramids of subsequent frames is used to perform the temporal filtering of the signal. The exact method of temporal filtering could vary with application, for ex. we could use a butterworth filter, an IIR filter etc. For an IIR filter, we perform a simple multiplicative update of  both the filter threshold</li>
+</ul>
+
+<pre><code>lowpass = (1-const_factor)*lowpass + const_factor*pyramid;
+</code></pre>
+
+<ul>
+<li>The difference of the computed thresholds gives us the range of frequencies to work with(magnify or suppress, based on the laplacian pyramid level)</li>
+</ul>
+
+<pre><code>filtered = (cutoff1 - cutoff2);
+</code></pre>
+
+<ul>
+<li>Now we have performed the temporal selection of the signal. We will selectively perform the spatial magnification of the signal. Note that the equation that we will use to magnify the spatial frequencies(amount of magnification of a specific spatial frequency), can vary across different use cases, but in this paper, the authors have used linearly increasing magnification with spatial wavelengths with a specific threshold after which the magnification remains constant.
+!!!!!Insert Figure of the curve from paper!!!!!</li>
+<li>The above figure gives us the magnification value at each spatial wavelength level(which is given by the pyramid index). We multiply the filtered signal above by the appropriate multiplication(or magnification) factor to get the modified filter values. Note that we will have to do this for all the images in the pyramid.</li>
+<li>Using these final filtered values, we again recreate the image frame from the new image pyramid.</li>
+<li>We can also consider adding some chromatic aberration if we either want to mix the motion magnified signal and the original signal better(more homogeneously without weird colour artifacts) or we want to show a clear motion in the subsequent frames hence clearly separate the motion magnification and the frame(we can have a contrast between them). Which of the two cases happens will depend on the exact method(and value) of chromatic aberration. </li>
+</ul>
+
+<pre><code>output(:,:,1) = output(:,:,1)*chromaticAttenuation1; //Red channel chromatic attenuation
+output(:,:,2) = output(:,:,2)*chromaticAttenuation2; //Green channel chromatic attenuation
+output(:,:,3) = output(:,:,3)*chromaticAttenuation3; //Blue channel chromatic attenuation
+</code></pre>
+
+<ul>
+<li>So we finally have the magnified motion. But we need the magnified motion on the image. Hence we add this magnified motion to the original input frame to get the output frame which we will write back to the output video.</li>
+</ul>
+
+<pre><code>output = frame + output;
+</code></pre>
+
+<h2>
+<a id="practically-observing-outputs-of-the-above-algorithm" class="anchor" href="#practically-observing-outputs-of-the-above-algorithm" aria-hidden="true"><span class="octicon octicon-link"></span></a>Practically observing outputs of the above algorithm</h2>
 
 <h3>
 <a id="personal-inspiration-for-the-project" class="anchor" href="#personal-inspiration-for-the-project" aria-hidden="true"><span class="octicon octicon-link"></span></a>Personal Inspiration for the Project</h3>
