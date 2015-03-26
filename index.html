@@ -143,12 +143,7 @@
 <li>Now we have performed the temporal selection of the signal. We will selectively perform the spatial magnification of the signal. Note that the equation that we will use to magnify the spatial frequencies(amount of magnification of a specific spatial frequency), can vary across different use cases, but in this paper, the authors have used linearly increasing magnification with spatial wavelengths with a specific threshold after which the magnification remains constant.
 <img src="https://raw.githubusercontent.com/ashray/Eulerian-Video-Magnification/master/Magnification%20Curve%20Used%20in%20Paper.png" alt="Magnification Curve">
 </li>
-</ul>
-
-<p>!!!!!Insert Figure of the curve from paper!!!!!</p>
-
-<ul>
-<li>The above figure gives us the magnification value at each spatial wavelength level(which is given by the pyramid index). We multiply the filtered signal above by the appropriate multiplication(or magnification) factor to get the modified filter values. Note that we will have to do this for all the images in the pyramid.</li>
+<li>The above figure gives us the magnification value(Y axis) at each spatial wavelength(X axis) level(which is given by the pyramid index). We multiply the filtered signal above by the appropriate multiplication(or magnification) factor to get the modified filter values. Note that we will have to do this for all the images in the pyramid.</li>
 <li>Using these final filtered values, we again recreate the image frame from the new image pyramid.</li>
 <li>We can also consider adding some chromatic aberration if we either want to mix the motion magnified signal and the original signal better(more homogeneously without weird colour artifacts) or we want to show a clear motion in the subsequent frames hence clearly separate the motion magnification and the frame(we can have a contrast between them). Which of the two cases happens will depend on the exact method(and value) of chromatic aberration. </li>
 </ul>
@@ -167,6 +162,41 @@ output(:,:,3) = output(:,:,3)*chromaticAttenuation3; //Blue channel chromatic at
 
 <h2>
 <a id="practically-observing-outputs-of-the-above-algorithm" class="anchor" href="#practically-observing-outputs-of-the-above-algorithm" aria-hidden="true"><span class="octicon octicon-link"></span></a>Practically observing outputs of the above algorithm</h2>
+
+<p>To understand the algorithm completely and to verify if the outputs are intuitive, I ran the code and I am summarising the results below.</p>
+
+<p>A baby <a href="https://github.com/ashray/Eulerian-Video-Magnification/blob/master/baby.mp4">sample video</a> was used to generate the images below.</p>
+
+<p>Below is the second frame of the video. This is what goes as an input to our algorithm.
+<img src="https://raw.githubusercontent.com/ashray/Eulerian-Video-Magnification/master/Original_Frame_2.jpg" alt="Frame 2 of baby video"></p>
+
+<p>The algorithm find out the difference between frame 1 and frame 2 and gives us the following output
+<img src="https://raw.githubusercontent.com/ashray/Eulerian-Video-Magnification/master/Frame1_2_difference.jpg" alt="Frame 1-2 difference"></p>
+
+<p>Note that the above difference image had to be scaled to normalise it to cover the entire intensity levels otherwise its very difficult to see the difference and we only observe a black image. But one thing is really interesting in this image, that amidst the random squares that we observe, there is one straight red line, nearly in the centre of the image. If we try to match this to out input image, we will observe that this line belongs to the chain of the child's clothes. But as it would be obvious here, if we add this motion to the original frame, the resultant frame will be really bad since we see lots of random areas where there was ideally zero motion.</p>
+
+<p>To solve this problem, we use chromatic aberration factors. We can see that most of the useful information is in red here, so we suppress the other color channels(by multiplying them by 0.1, so reducing them to 10% of original value). After performing the above calculation, the frame becomes
+<img src="https://raw.githubusercontent.com/ashray/Eulerian-Video-Magnification/master/Frame1_2_difference_chromatic_correction.jpg" alt="Frame 1-2 difference chromatic corrected"></p>
+
+<p>It is very clear now that the major motion is the one of the child's zip. This should be expected because other areas are more continuous, hence have a lesser frequency components, whereas a zip is like a discontinuity which contributes multiple frequencies and hence has a higher contribution to the difference frame.</p>
+
+<p>We add the above frame to our original frame(in the RGB domain) and we get the final frame(for the output video) below.
+<img src="https://raw.githubusercontent.com/ashray/Eulerian-Video-Magnification/master/Final_Frame_2.jpg" alt="Final Processed 2nd frame"></p>
+
+<p>If we closely notice, some of the bad areas in the image(patches in smooth areas) are exactly the same as what were observed in the final difference image(after chromatic aberrations).</p>
+
+<p>Now, we would expect that the difference image that we get for nearby frames should be similar(since we aren't allowing for infinite frequency changes) and should be more different for frames which are further apart.</p>
+
+<p>This claim is verified by the 3 images below.
+<img src="https://raw.githubusercontent.com/ashray/Eulerian-Video-Magnification/master/Frame1_2_difference_chromatic_correction.jpg" alt="Frame 1-2 difference">
+<img src="https://raw.githubusercontent.com/ashray/Eulerian-Video-Magnification/master/Frame2_3_difference_chromatic_correction.jpg" alt="Frame 2-3 difference">
+<img src="https://raw.githubusercontent.com/ashray/Eulerian-Video-Magnification/master/Frame29_30_difference_chromatic_correction.jpg" alt="Frame 29-30 difference"></p>
+
+<p>We also see much lesser artefacts in frame 29-30 difference because after some time, the error caused by the initial condition nullifies.</p>
+
+<p>Clearly we can see that the above technique is able to identify the motion in the frame(we can say this because it identifies the child's body motion, or the motion of his zip and neglects the other bodies in the frame). Also as we have seen the new created frames aren't that big a problem to the video quality(artefacts).</p>
+
+<p>Which basically proves Video Magnification is awesome :D</p>
 
 <h3>
 <a id="personal-inspiration-for-the-project" class="anchor" href="#personal-inspiration-for-the-project" aria-hidden="true"><span class="octicon octicon-link"></span></a>Personal Inspiration for the Project</h3>
