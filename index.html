@@ -141,7 +141,14 @@
 
 <ul>
 <li>Now we have performed the temporal selection of the signal. We will selectively perform the spatial magnification of the signal. Note that the equation that we will use to magnify the spatial frequencies(amount of magnification of a specific spatial frequency), can vary across different use cases, but in this paper, the authors have used linearly increasing magnification with spatial wavelengths with a specific threshold after which the magnification remains constant.
-!!!!!Insert Figure of the curve from paper!!!!!</li>
+<img src="https://github.com/ashray/Eulerian-Video-Magnification/blob/master/Magnification%20Curve%20Used%20in%20Paper.png" alt="Magnification Curve">
+<a href="https://github.com/ashray/Eulerian-Video-Magnification/blob/master/Magnification%20Curve%20Used%20in%20Paper.png">Magnification Curve</a>
+</li>
+</ul>
+
+<p>!!!!!Insert Figure of the curve from paper!!!!!</p>
+
+<ul>
 <li>The above figure gives us the magnification value at each spatial wavelength level(which is given by the pyramid index). We multiply the filtered signal above by the appropriate multiplication(or magnification) factor to get the modified filter values. Note that we will have to do this for all the images in the pyramid.</li>
 <li>Using these final filtered values, we again recreate the image frame from the new image pyramid.</li>
 <li>We can also consider adding some chromatic aberration if we either want to mix the motion magnified signal and the original signal better(more homogeneously without weird colour artifacts) or we want to show a clear motion in the subsequent frames hence clearly separate the motion magnification and the frame(we can have a contrast between them). Which of the two cases happens will depend on the exact method(and value) of chromatic aberration. </li>
