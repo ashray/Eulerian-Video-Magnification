@@ -1,37 +1,37 @@
 <!DOCTYPE html>
 <html>
-
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="Eulerian-video-magnification : Implement the Eulerian Video Magnification technique">
-
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>Eulerian-video-magnification</title>
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>Eulerian-video-magnification by ashray</title>
   </head>
 
   <body>
+    <div id="container">
+      <div class="inner">
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/ashray/Eulerian-Video-Magnification">View on GitHub</a>
-
-          <h1 id="project_title">Eulerian-video-magnification</h1>
-          <h2 id="project_tagline">Implement the Eulerian Video Magnification technique</h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/ashray/Eulerian-Video-Magnification/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/ashray/Eulerian-Video-Magnification/tarball/master">Download this project as a tar.gz file</a>
-            </section>
+        <header>
+          <h1>Eulerian-video-magnification</h1>
+          <h2>Implement the Eulerian Video Magnification technique</h2>
         </header>
-    </div>
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h3>
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/ashray/Eulerian-Video-Magnification/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/ashray/Eulerian-Video-Magnification/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/ashray/Eulerian-Video-Magnification" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
+          <h3>
 <a id="personal-details" class="anchor" href="#personal-details" aria-hidden="true"><span class="octicon octicon-link"></span></a>Personal Details</h3>
 
 <p>Name: Ashray Malhotra</p>
@@ -94,7 +94,7 @@
 
 <p>I interned with Goldman Sachs technologies in my third year. My work involved extensive use of Java. Goldman involved working with teams across the globe. So I am comfortable working with people across multiple time zones and this shall not be a problem in the development process. I have worked with C++ in my advanced computing course. Based on my skills, I was selected to be a Teaching Assistant for <a href="https://www.edx.org/course/introduction-computer-programming-part-1-iitbombayx-cs101-1x">IIT Bombay's first online course</a>, in which programming was taught in C++.</p>
 
-<p>I have built VTK on my macbook. I also ran a few test codes from the site and it was awesome :D. This was the <a href="https://youtu.be/uNrZHnm4LfU">cylinder test</a>. Also tried a few advanced applications like 3D Slicer.</p>
+<p>I have built VTK on my macbook. I also ran a few test codes from the site and it was awesome :D. This was the <a href="https://youtu.be/uNrZHnm4LfU">cylinder test</a>.</p>
 
 <p>Programming languages I have previously worked with include C++, Java, Cilk, Python, Matlab, openGL, CUDA, Assembly Language Programming, etc.</p>
 
@@ -203,10 +203,63 @@ output(:,:,3) = output(:,:,3)*chromaticAttenuation3; //Blue channel chromatic at
 
 <p>Which basically proves Video Magnification is awesome :D</p>
 
+<h2>
+<a id="timeline" class="anchor" href="#timeline" aria-hidden="true"><span class="octicon octicon-link"></span></a>Timeline</h2>
+
+<h3>
+<a id="pre-gsoc" class="anchor" href="#pre-gsoc" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pre GSOC</h3>
+
+<p>Implement the video magnification algorithm. I am even currently working on the algorithm as my course project and this will have to be completed before April end, which means before the start of GSOC project. This also easies my task in those 12 weeks and helps me concentrate on shipping professional code,</p>
+
+<h3>
+<a id="community-bonding" class="anchor" href="#community-bonding" aria-hidden="true"><span class="octicon octicon-link"></span></a>Community Bonding</h3>
+
+<p>Getting acquainted with the code base of VTK and the procedure that needs to be followed to submit code and get it reviewed. Discussing with the team on what exactly needs to be the problem statement(minute details, like kind of dataset we want to use, what parameters should be user choices, like magnification factors, what should be algorithmically decided based on input data type, etc).</p>
+
+<h3>
+<a id="week-1" class="anchor" href="#week-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Week 1</h3>
+
+<p>Understand the relevant parts of the VTK code base and try to figure out how the final product should look like, how many and what kind of views should be made etc.</p>
+
+<h3>
+<a id="week-2" class="anchor" href="#week-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Week 2</h3>
+
+<p>Begin implementing magnifying motions. In this week, focus on implementing spatial pyramids, given an image using Gaussian and Laplacian pyramid techniques. Work load has been kept less this week so that can practice other crucial techniques such as adding test cases and understanding code review work flow.</p>
+
+<h3>
+<a id="week-3" class="anchor" href="#week-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Week 3</h3>
+
+<p>Finally get to video(and/or some other temporally varying data if the team decides to tackle that use case). Understand temporal filtering of signals and begin coding temporal filtering of signals.</p>
+
+<h3>
+<a id="week-5-6" class="anchor" href="#week-5-6" aria-hidden="true"><span class="octicon octicon-link"></span></a>Week 5-6</h3>
+
+<p>Code all different kind of temporal filters(IIR, Ideal etc, Which ones to implement will be decided in the community bonding period. My personal choice would be to code the 4 used in the paper). Also this would be the mid term review period.</p>
+
+<h3>
+<a id="week-7-8" class="anchor" href="#week-7-8" aria-hidden="true"><span class="octicon octicon-link"></span></a>Week 7-8</h3>
+
+<p>Once we have both the spatial and temporal filters ready, to combine these two codes is easy. We would need to spend time though trying to optimise parameters for specific use cases. We can perform enough number of experiments to come up with a guideline or a rule book on how to choose the parameters. This would be useful to developers when they want to use this code for their applications and use cases.</p>
+
+<h3>
+<a id="week-9-10" class="anchor" href="#week-9-10" aria-hidden="true"><span class="octicon octicon-link"></span></a>Week 9-10</h3>
+
+<p>Start working on the designing views for implementation of this code in the toolkit.</p>
+
+<h3>
+<a id="week-11-12" class="anchor" href="#week-11-12" aria-hidden="true"><span class="octicon octicon-link"></span></a>Week 11-12</h3>
+
+<p>Take feedback from the community and iterate on the designs and improvise on use cases. Ensure code quality by adding more test cases and working with more videos. Work to make document, blogs or videos to help increase the user base for this product(Subject to developer community approval).</p>
+
+<h3>
+<a id="week-13" class="anchor" href="#week-13" aria-hidden="true"><span class="octicon octicon-link"></span></a>Week 13</h3>
+
+<p>Spare week in case of some work getting delayed, in case of any emergency or otherwise.</p>
+
 <h3>
 <a id="personal-inspiration-for-the-project" class="anchor" href="#personal-inspiration-for-the-project" aria-hidden="true"><span class="octicon octicon-link"></span></a>Personal Inspiration for the Project</h3>
 
-<p>I am really excited to work on the idea o video magnification. I have been following that topic since really long, first came to know about it from their <a href="http://www.ted.com/talks/michael_rubinstein_see_invisible_motion_hear_silent_sounds_cool_creepy_we_can_t_decide?language=en">TED talk</a>, which inspired me to read their <a href="http://people.csail.mit.edu/mrub/vidmag/#publications">research paper</a>. I was also working in the week long <a href="https://mitredxcampjan2015.wordpress.com">ReDX camp</a> conducted by MIT Media lab(conducted by Prof Ramesh Raskar). One of the projects in that lab was to find out the human arteries. I was shocked to find out that doctors still need to stop the blood flow and then find the arteries. According to some data that was collected during the workshop, it could take upto 7 minutes to find an infants(or older people’s) correct blood vessels; in a crucial operation, this could be lethal. The team in that week had come up with an IR device which would assist the RGB camera of the cellphone and using Augmented Reality would superimpose the blood vessels(visible in IR) on to the RGB smartphone camera.</p>
+<p>I am really excited to work on the idea of video magnification. I have been following that topic since really long, first came to know about it from their <a href="http://www.ted.com/talks/michael_rubinstein_see_invisible_motion_hear_silent_sounds_cool_creepy_we_can_t_decide?language=en">TED talk</a>, which inspired me to read their <a href="http://people.csail.mit.edu/mrub/vidmag/#publications">research paper</a>. I was also working in the week long <a href="https://mitredxcampjan2015.wordpress.com">ReDX camp</a> conducted by MIT Media lab(conducted by Prof Ramesh Raskar). One of the projects in that lab was to find out the human arteries. I was shocked to find out that doctors still need to stop the blood flow and then find the arteries. According to some data that was collected during the workshop, it could take upto 7 minutes to find an infants(or older people’s) correct blood vessels; in a crucial operation, this could be lethal. The team in that week had come up with an IR device which would assist the RGB camera of the cellphone and using Augmented Reality would superimpose the blood vessels(visible in IR) on to the RGB smartphone camera.</p>
 
 <p>But I still had a problem with this solution, that we would still need a separate hardware, it could not be user friendly etc. So I wanted to apply the concept of Video Magnification to be able to magnify the blood vessel movement. This way, the injections could be correct in the first attempt and in no time.</p>
 
@@ -215,18 +268,19 @@ output(:,:,3) = output(:,:,3)*chromaticAttenuation3; //Blue channel chromatic at
 <p>We all know that video magnification can solve this simple problem, the only issue is that it seems no one has actually put in effort to get it to the people. When I came back from my home town after this incident, I decided to take this challenge on myself. I decided to implement this technology myself, out of interest and as a course project in my Medical Image Processing course. By April end(this year), I would have myself implemented this technique(which would mean I would completely know how this works, not just have a theoretical understanding). I will be free in summers and even in the final year(5th year), we just have a research project and a course or two. It is my aim to be able to get this technology in the hands of as many people as I possibly can. I already had plans to work on an implementation of this technology in these summer vacations. I would be glad if I could do this as a part of GSOC along with Kitware.</p>
 
 <p>I have a huge personal inspiration to get this technology out to the world, and you can be assured of my motivation to complete this project.</p>
-      </section>
-    </div>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Eulerian-video-magnification maintained by <a href="https://github.com/ashray">ashray</a></p>
-        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
+<h3>
+<a id="references" class="anchor" href="#references" aria-hidden="true"><span class="octicon octicon-link"></span></a>References</h3>
 
-              <script type="text/javascript">
+<p>Most of the content including images and input video for this document have been taken from the <a href="http://people.csail.mit.edu/mrub/vidmag/">website</a> of the authors of the paper.</p>
+        </section>
+
+        <footer>
+          Eulerian-video-magnification is maintained by <a href="https://github.com/ashray">ashray</a><br>
+          This page was generated by <a href="https://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+                  <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
           </script>
@@ -237,6 +291,7 @@ output(:,:,3) = output(:,:,3)*chromaticAttenuation3; //Blue channel chromatic at
             } catch(err) {}
           </script>
 
-
+      </div>
+    </div>
   </body>
 </html>
