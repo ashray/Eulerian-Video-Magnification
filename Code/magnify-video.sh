@@ -11,7 +11,7 @@ function show_usage_and_exit {
 }
 
 function make_video {
-	avconv -i frames/output_%d.png -r 30 -b 65536k "output/$FILTER_TYPE/$NAME-$MAGNIFICATION.mp4"
+	avconv -i frames/output_%d.png -r 30 -b 65536k "output/$FILTER_TYPE/$filename-$MAGNIFICATION.mp4"
 }
 
 function make_frames {
@@ -36,10 +36,9 @@ fi
 FILTER_TYPE=$1
 INPUT_VIDEO=$2
 
-NAME=`echo "$INPUT_VIDEO" | cut -d'.' -f1`
-EXTENSION=`echo "$INPUT_VIDEO" | cut -d'.' -f2`
+filename=$(basename "$INPUT_VIDEO")
+extension="${filename##*.}"
+filename="${filename%.*}"
 
-echo NAME
-echo EXTENSION
-echo "$INPUT_VIDEO" | cut -d'.' -f1
-#make_frames && make_video && clean_frames_folder
+#echo $filename
+make_frames && make_video && clean_frames_folder
