@@ -75,3 +75,15 @@ def merge_lappyr(levels):
         img = cv2.pyrUp(img, dstsize=getsize(lev_img))
         img += lev_img
     return img
+
+def make_grayscale_pixel(r,g,b):
+    return (r+g+b)/3
+
+def make_grayscale(frame):
+    w, h = len(frame[0]), len(frame)
+    result = np.zeros([h, w])
+    for x in xrange(w):
+        for y in xrange(h):
+            rgb = frame[y][x]
+            result[y][x] = make_grayscale_pixel(*rgb)
+    return result
