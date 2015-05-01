@@ -23,6 +23,6 @@ Example
 
 If you want to magnify a baby.mp4 video, then make a folder named "input" inside the code folder and copy the input video, in this case baby.mp4 inside the input folder.
 Then run 
-./magnify-video.sh iir baby.mp4 20
+    ./magnify-video.sh iir baby.mp4 20
 
 The output video, in this case will be generated in ./output/iir/baby-20.mp4
