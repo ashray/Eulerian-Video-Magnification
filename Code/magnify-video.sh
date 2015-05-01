@@ -1,4 +1,6 @@
 #!/bin/bash
+mkdir -p frames
+mkdir -p output/iir output/butter
 
 MAGNIFICATION=
 
@@ -9,16 +11,16 @@ function show_usage_and_exit {
 }
 
 function make_video {
-	avconv -i frames/output_%d.png -r 30 -b 65536k "output/$FILTER_TYPE/$INPUT_VIDEO-$MAGNIFICATION.mp4"
+	avconv -i frames/output_%d.png -r 30 -b 65536k "output/$FILTER_TYPE/$NAME-$MAGNIFICATION.mp4"
 }
 
 function make_frames {
-	python -u "$FILTER_TYPE.py" "input/$INPUT_VIDEO.mp4" $MAGNIFICATION
+	python -u "$FILTER_TYPE.py" "input/$INPUT_VIDEO" $MAGNIFICATION
 	# -u => unbuffered input and output
 }
 
 function clean_frames_folder {
-	rm -f frames/*
+	rm -rf frames
 }
 
 if [ -z "$1" ] || [ -z "$2" ]
@@ -34,4 +36,10 @@ fi
 FILTER_TYPE=$1
 INPUT_VIDEO=$2
 
-clean_frames_folder && make_frames && make_video
+NAME=`echo "$INPUT_VIDEO" | cut -d'.' -f1`
+EXTENSION=`echo "$INPUT_VIDEO" | cut -d'.' -f2`
+
+echo NAME
+echo EXTENSION
+echo "$INPUT_VIDEO" | cut -d'.' -f1
+#make_frames && make_video && clean_frames_folder
