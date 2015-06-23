@@ -6,7 +6,7 @@ OpenCV implementation of http://people.csail.mit.edu/mrub/papers/vidmag.pdf
 Dependencies
 ------------
 
-numpy, opencv, avconv
+numpy, opencv, FFmpeg
 
 Running the code
 ----------------
