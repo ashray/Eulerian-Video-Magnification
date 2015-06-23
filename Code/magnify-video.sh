@@ -11,7 +11,7 @@ function show_usage_and_exit {
 }
 
 function make_video {
-	avconv -i frames/output_%d.png -r 30 -b 65536k "output/$FILTER_TYPE/$filename-$MAGNIFICATION.mp4"
+	ffmpeg -framerate 30 -i frames/output_%d.png -c:v libx264 -r 30 -pix_fmt yuv420p out.mp4
 }
 
 function make_frames {
